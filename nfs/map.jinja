@@ -42,7 +42,9 @@ that differ from whats in defaults.yaml
       'service_server': 'nfs',
       'service_client': 'rpcbind'
     }
-  }
+  },
+  grain='os',
+  merge=salt['pillar.get']('nfs:lookup')
 ) %}
 
 {## Merge the flavor_map over the default settings ##}
