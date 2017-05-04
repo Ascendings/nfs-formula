@@ -1,50 +1,66 @@
-{% set map = {
+# -*- coding: utf-8 -*-
+# vim: ft=jinja
+
+{## Start with  defaults from defaults.sls ##}
+{% import_yaml 'nfs/defaults.yaml' as default_settings %}
+
+{##
+Setup variable using grains['os_family'] based logic, only add key:values here
+that differ from whats in defaults.yaml
+##}
+{% set flavor_map = salt['grains.filter_by'](
+  {
     'SUSE': {
-        'pkgs_server': ['nfs-kernel-server'],
-        'pkgs_client': ['nfs-client'],
-        'service_server_dependency': False,
-        'service_server': 'nfsserver',
-        'service_client': False
+      'pkgs_server': ['nfs-kernel-server'],
+      'pkgs_client': ['nfs-client'],
+      'service_server_dependency': False,
+      'service_server': 'nfsserver',
+      'service_client': False
     },
     'Ubuntu': {
-        'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
-        'pkgs_client': ['nfs-common'],
-        'service_server_dependency': False,
-        'service_server': 'nfs-kernel-server',
-        'service_client': False
+      'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
+      'pkgs_client': ['nfs-common'],
+      'service_server_dependency': False,
+      'service_server': 'nfs-kernel-server',
+      'service_client': False
     },
     'Debian': {
-        'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
-        'pkgs_client': ['nfs-common'],
-        'service_server_dependency': False,
-        'service_server': 'nfs-kernel-server',
-        'service_client': False
+      'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
+      'pkgs_client': ['nfs-common'],
+      'service_server_dependency': False,
+      'service_server': 'nfs-kernel-server',
+      'service_client': False
     },
     'Raspbian': {
-        'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
-        'pkgs_client': ['nfs-common'],
-        'service_server_dependency': False,
-        'service_server': 'nfs-kernel-server',
-        'service_client': False
+      'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
+      'pkgs_client': ['nfs-common'],
+      'service_server_dependency': False,
+      'service_server': 'nfs-kernel-server',
+      'service_client': False
     },
     'FreeBSD': {
-        'pkgs_server': False,
-        'pkgs_client': False,
-        'service_server_dependency': False,
-        'service_server': 'nfsd',
-        'service_client': False
+      'pkgs_server': False,
+      'pkgs_client': False,
+      'service_server_dependency': False,
+      'service_server': 'nfsd',
+      'service_client': False
     },
     'CentOS': {
-        'pkgs_server': ['nfs-utils'],
-        'pkgs_client': ['nfs-utils'],
-        'service_server_dependency': 'rpcbind',
-        'service_server': 'nfs',
-        'service_client': 'rpcbind'
+      'pkgs_server': ['nfs-utils'],
+      'pkgs_client': ['nfs-utils'],
+      'service_server_dependency': 'rpcbind',
+      'service_server': 'nfs',
+      'service_client': 'rpcbind'
     }
-} %}
+  }
+) %}
 
-{% if grains.get('saltversion', '').startswith('0.17') %}
-{% set nfs = salt['grains.filter_by'](map, merge=salt['pillar.get']('nfs:lookup'), base='default') %}
-{% else %}
-{% set nfs = map.get(grains.os) %}
-{% endif %}
+{## Merge the flavor_map over the default settings ##}
+{% do default_settings.nfs.update(flavor_map) %}
+
+{## Merge in changes from the nfs:lookup pillar ##}
+{% set nfs_settings = salt['pillar.get'](
+  'nfs',
+  default=default_settings.nfs,
+  merge=True
+) %}
