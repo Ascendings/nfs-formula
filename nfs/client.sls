@@ -1,4 +1,4 @@
-{% from "nfs/map.jinja" import nfs with context %}
+{% from "nfs/map.jinja" import nfs_settings as nfs with context %}
 
 {% if nfs.pkgs_client %}
 nfs-client-deps:

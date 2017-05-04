@@ -1,4 +1,4 @@
-{% from "nfs/map.jinja" import nfs with context %}
+{% from "nfs/map.jinja" import nfs_settings as nfs with context %}
 
 {#  FreeBSD has everything needed for NFS w/o any
     additional pkgs, so pkgs_server == False #}
