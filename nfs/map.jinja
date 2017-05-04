@@ -15,17 +15,7 @@ that differ from whats in defaults.yaml
       'pkgs_client': ['nfs-client'],
       'service_server': 'nfsserver',
     },
-    'Ubuntu': {
-      'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
-      'pkgs_client': ['nfs-common'],
-      'service_server': 'nfs-kernel-server',
-    },
     'Debian': {
-      'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
-      'pkgs_client': ['nfs-common'],
-      'service_server': 'nfs-kernel-server',
-    },
-    'Raspbian': {
       'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
       'pkgs_client': ['nfs-common'],
       'service_server': 'nfs-kernel-server',
@@ -35,7 +25,7 @@ that differ from whats in defaults.yaml
       'pkgs_client': False,
       'service_server': 'nfsd',
     },
-    'CentOS': {
+    'RedHat': {
       'pkgs_server': ['nfs-utils'],
       'pkgs_client': ['nfs-utils'],
       'service_server_dependency': 'rpcbind',
@@ -43,7 +33,7 @@ that differ from whats in defaults.yaml
       'service_client': 'rpcbind'
     }
   },
-  grain='os',
+  grain='os_family',
   merge=salt['pillar.get']('nfs:lookup')
 ) %}
 
