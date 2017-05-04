@@ -13,37 +13,27 @@ that differ from whats in defaults.yaml
     'SUSE': {
       'pkgs_server': ['nfs-kernel-server'],
       'pkgs_client': ['nfs-client'],
-      'service_server_dependency': False,
       'service_server': 'nfsserver',
-      'service_client': False
     },
     'Ubuntu': {
       'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
       'pkgs_client': ['nfs-common'],
-      'service_server_dependency': False,
       'service_server': 'nfs-kernel-server',
-      'service_client': False
     },
     'Debian': {
       'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
       'pkgs_client': ['nfs-common'],
-      'service_server_dependency': False,
       'service_server': 'nfs-kernel-server',
-      'service_client': False
     },
     'Raspbian': {
       'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
       'pkgs_client': ['nfs-common'],
-      'service_server_dependency': False,
       'service_server': 'nfs-kernel-server',
-      'service_client': False
     },
     'FreeBSD': {
       'pkgs_server': False,
       'pkgs_client': False,
-      'service_server_dependency': False,
       'service_server': 'nfsd',
-      'service_client': False
     },
     'CentOS': {
       'pkgs_server': ['nfs-utils'],

@@ -1,0 +1,5 @@
+nfs:
+  # Most things will not need these - only RedHat-based OSes need them
+  service_server_dependency: False
+  serivce_client: False
+
