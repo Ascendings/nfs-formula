@@ -37,7 +37,7 @@
     'CentOS': {
         'pkgs_server': ['nfs-utils'],
         'pkgs_client': ['nfs-utils'],
-        'service_server_dependency': False,
+        'service_server_dependency': 'rpcbind',
         'service_server': 'nfs',
         'service_client': 'rpcbind'
     }
