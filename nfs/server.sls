@@ -28,6 +28,8 @@ nfs-service_{{ service }}:
   service.running:
     - name: {{ service }}
     - enable: True
+    - watch:
+      - file: /etc/exports
   {% endfor %}
 {% else %}
 nfs-service_{{ nfs.service_server }}:
