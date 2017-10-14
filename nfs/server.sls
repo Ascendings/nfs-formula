@@ -12,8 +12,6 @@ nfs-server-deps:
   file.managed:
     - source: salt://nfs/files/exports
     - template: jinja
-    - watch_in:
-      - service: nfs-service
 
 {# RedHat-based OSes requires to start rpcbind first
     and in some versions there is a bug that it does not start as a dependency #}
@@ -36,4 +34,6 @@ nfs-service_{{ nfs.service_server }}:
   service.running:
     - name: {{ nfs.service_server }}
     - enable: True
+    - watch:
+      - file: /etc/exports
 {% endif %}
