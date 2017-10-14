@@ -4,8 +4,8 @@
     additional pkgs, so pkgs_server == False #}
 {% if nfs.pkgs_server %}
 nfs-server-deps:
-    pkg.installed:
-        - pkgs: {{ nfs.pkgs_server|json }}
+  pkg.installed:
+    - pkgs: {{ nfs.pkgs_server|json }}
 {% endif %}
 
 /etc/exports:
@@ -24,7 +24,16 @@ nfs-service-dependency:
     - enable: True
 {% endif %}
 
-nfs-service:
+{% if nfs.service_server is list %}
+  {% for service in nfs.service_server %}
+nfs-service_{{ service }}:
+  service.running:
+    - name: {{ service }}
+    - enable: True
+  {% endfor %}
+{% else %}
+nfs-service_{{ nfs.service_server }}:
   service.running:
     - name: {{ nfs.service_server }}
     - enable: True
+{% endif %}

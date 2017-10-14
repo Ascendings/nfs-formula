@@ -23,7 +23,7 @@ that differ from whats in defaults.yaml
     'FreeBSD': {
       'pkgs_server': False,
       'pkgs_client': False,
-      'service_server': 'nfsd',
+      'service_server': ['nfsd', 'mountd'],
     },
     'RedHat': {
       'pkgs_server': ['nfs-utils'],
