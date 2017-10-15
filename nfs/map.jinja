@@ -24,13 +24,14 @@ that differ from whats in defaults.yaml
       'pkgs_server': False,
       'pkgs_client': False,
       'service_server': ['nfsd', 'mountd'],
+      'nfsv4_server_enable': True,
     },
     'RedHat': {
       'pkgs_server': ['nfs-utils'],
       'pkgs_client': ['nfs-utils'],
       'service_server_dependency': 'rpcbind',
       'service_server': 'nfs',
-      'service_client': 'rpcbind'
+      'service_client': 'rpcbind',
     }
   },
   grain='os_family',

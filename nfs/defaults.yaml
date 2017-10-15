@@ -2,4 +2,6 @@ nfs:
   # Most things will not need these - only RedHat-based OSes need them
   service_server_dependency: False
   service_client: False
+  # This will be needed for FreeBSD servers to enable NFSv4
+  nfsv4_server_enable: False
 

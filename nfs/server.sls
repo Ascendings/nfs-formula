@@ -39,3 +39,19 @@ nfs-service_{{ nfs.service_server }}:
     - watch:
       - file: /etc/exports
 {% endif %}
+
+{# This is needed for FreeBSD-based OSes to have an NFSv4 server #}
+{% if nfs.nfsv4_server_enable %}
+nfsv4_service:
+  file.append:
+    - name: /etc/rc.conf
+    - text: 'nfsv4_server_enable="YES"'
+    - watch_in:
+    {% if nfs.service_server is list %}
+      {% for service in nfs.service_server %}
+      - service: {{ service }}
+      {% endfor %}
+    {% else %}
+      - service: {{ nfs.service_server }}
+    {% endif %}
+{% endif %}
