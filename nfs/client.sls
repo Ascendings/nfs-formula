@@ -13,3 +13,10 @@ nfs-service:
     - enable: True
 {% endif %}
 
+{% if nfs.nfsv4_client_enable and salt['grains.get']('os') == 'FreeBSD' %}
+nfsv4_userd_service:
+  service.running:
+    - name: nfsuserd
+    - enable: True
+{% endif %}
+
