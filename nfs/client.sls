@@ -12,3 +12,11 @@ nfs-service:
     - name: {{ nfs.service_client }}
     - enable: True
 {% endif %}
+
+{% if nfs_settings.nfsv4_client_enable and salt['pillar.get']('os') == 'FreeBSD' %}
+nfsv4_userd_service:
+  service.running:
+    - name: nfsuserd
+    - enable: True
+{% endif %}
+
