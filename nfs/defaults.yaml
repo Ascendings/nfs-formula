@@ -4,4 +4,5 @@ nfs:
   service_client: False
   # This will be needed for FreeBSD servers to enable NFSv4
   nfsv4_server_enable: False
+  nfsv4_client_enable: False
 
