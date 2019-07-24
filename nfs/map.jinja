@@ -26,6 +26,7 @@ that differ from whats in defaults.yaml
       'service_server': ['nfsd', 'mountd'],
       'nfsv4_server_enable': True,
       'nfsv4_client_enable': True,
+      'idmapd_manage': false,
     },
     'RedHat': {
       'pkgs_server': ['nfs-utils'],
@@ -33,6 +34,7 @@ that differ from whats in defaults.yaml
       'service_server_dependency': 'rpcbind',
       'service_server': 'nfs',
       'service_client': 'rpcbind',
+      'idmapd_nobody_group': 'nobody',
     }
   },
   grain='os_family',

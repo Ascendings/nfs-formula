@@ -5,4 +5,11 @@ nfs:
   # This will be needed for FreeBSD servers to enable NFSv4
   nfsv4_server_enable: False
   nfsv4_client_enable: False
+  # Idmapd settings
+  idmapd_manage: True
+  idmapd_service: nfs-idmapd
+  idmapd_conf: /etc/idmapd.conf
+  idmapd_domain: exmaple.com
+  idmapd_nobody_user: nobody
+  idmapd_nobody_group: nogroup
 
