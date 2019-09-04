@@ -19,6 +19,7 @@ that differ from whats in defaults.yaml
       'pkgs_server': ['nfs-common', 'nfs-kernel-server'],
       'pkgs_client': ['nfs-common'],
       'service_server': 'nfs-kernel-server',
+      'idmapd_manage': False,
     },
     'FreeBSD': {
       'pkgs_server': False,
@@ -26,7 +27,7 @@ that differ from whats in defaults.yaml
       'service_server': ['nfsd', 'mountd'],
       'nfsv4_server_enable': True,
       'nfsv4_client_enable': True,
-      'idmapd_manage': false,
+      'idmapd_manage': False,
     },
     'RedHat': {
       'pkgs_server': ['nfs-utils'],
